@@ -1,0 +1,63 @@
+.loginWrapper {
+    background: #0d253d;  /* fallback for old browsers */
+    /* background: -webkit-linear-gradient(to right, #292E49, #536976);   */
+    /* background: linear-gradient(to right, #292E49, #536976);  */
+}
+
+.insideLoginWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 50%;
+
+    box-shadow: rgb(46, 46, 46) 6px 6px 15px 1px;
+    padding: 2rem;
+    border-radius: 10px;
+    color: white;
+
+    background: #202e49;  /* fallback for old browsers */
+    /* background: -webkit-linear-gradient(to right, #292E49, #536976); */
+    /* background: linear-gradient(to right, #292E49, #536976);  */
+}
+
+
+label{
+    display: block;
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+input{
+    display: block;
+    height: 15%;
+    min-height: 15%;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    box-shadow: none;
+    border: none;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: white
+}
+::placeholder{
+    color: #e5e5e5;
+    font-size: 1.25rem;
+}
+
+input[type="submit"]{
+    margin-top: 50px;
+    width: 35%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}

@@ -15,6 +15,16 @@ app.use('/mailing', mailingRoutes);
 const userRoutes = require('./routes/userRoutes');
 app.use('/user', userRoutes);
 
+const articlesRoutes = require('./routes/articles/articles');
+app.use('/articles', articlesRoutes);
+
+// // if(process.env.NODE_ENV === 'production') {
+//     app.use(express.static('client/build'));
+//     app.get('*', (req,res) => {
+//         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+//     })
+//   // }
+
 app.listen(port, () => {
     console.log(`Server is listening on port: ${port}`);
 })

@@ -12,7 +12,8 @@ exports.verifyToken = (req, res, next) => {
     next();
     
   } catch (err) {
-      res.status(401);
+
+      res.status(401).send({msg : 'Invalid or missing token.'});
   }
 };
 

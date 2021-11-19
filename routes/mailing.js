@@ -3,6 +3,8 @@ const router = express.Router();
 const nodeMailer = require('nodemailer');
 
 router.post('/send', (req,res, next) => {
+    const emailFrom = req.body.emailFrom;
+    const nameFrom = req.body.nameFrom
     const messageContent = req.body.messageContent;
 
     let transport = {
@@ -18,7 +20,7 @@ router.post('/send', (req,res, next) => {
 
     const mailOptions = {
         from: process.env.EMAIL,
-        to: 'nikodemniq@gmail.com',
+        to: 'tomekzaje.plw@gmail.com',
         subject: 'Aurora - Report',
         html: messageContent,
     }

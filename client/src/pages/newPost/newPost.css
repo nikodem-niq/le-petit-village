@@ -1,0 +1,58 @@
+.newProduct {
+  flex: 4;
+}
+
+.addProductForm {
+  margin: auto;
+  margin-left: 5%;
+
+}
+
+.addProductItem {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.addProductItem > label {
+  color: gray;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.addProductItem > input {
+  padding: 10px;
+  /* border: solid 1px black; */
+  box-shadow: black 1px 1px 5px 0.2px;
+  color: black;
+  font-size: 1rem;
+
+}
+
+.addProductItem > input::placeholder {
+  color: rgba(128, 128, 128, 0.452);
+  font-size: 0.85rem;
+}
+
+#contentEditor {
+  width: 60%;
+  height: 50%;
+
+}
+
+.jodit-ui-input__input {
+  color: black;
+}
+
+.addProductButton {
+  margin-top: 10px;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: darkblue;
+  color: white;
+  font-weight: 600;
+  width: 10%;
+  cursor: pointer;
+}
