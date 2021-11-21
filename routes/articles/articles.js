@@ -10,20 +10,30 @@ const pool = new pg.Pool({
     }
   });
 
-router.get('/fetch', verifyToken, (req,res,next) => {
+router.get('/fetch', (req,res,next) => {
     pool.connect().then(client => {
         let query;
         if(req.query.articleId) {
             query = `SELECT * FROM articles WHERE "articleId" = ${req.query.articleId}`
         } else {
-            query = `SELECT * FROM articles`;
+            query = `SELECT * FROM articles ORDER BY "articleId"`;
+        }
+        if(req.query.view) {
+            let viewQuery = `UPDATE articles SET views = views + 1 WHERE "articleId" = ${req.query.articleId}`;
+            client.query(viewQuery, (err,response) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    res.status(200).send(response);
+                }
+            });
         }
         console.log(query)
         client.query(query, (err,response) => {
+            client.release();
             if(err) {
                 console.log(err);
             } else {
-                client.release();
                 res.status(200).send(response.rows)
             }
         })
@@ -33,7 +43,7 @@ router.get('/fetch', verifyToken, (req,res,next) => {
 router.post('/post', verifyToken, (req,res,next) => {
     pool.connect().then(client => {
         const { heroImg, header, subHeader, content } = req.body;
-        let query = `INSERT INTO articles("heroImg", header, "subHeader", content, date, views) VALUES ('${heroImg}', '${header}', '${subHeader}', '${content}', NOW(), ${1})`;
+        let query = `INSERT INTO articles("heroImg", header, "subHeader", content, date, views) VALUES ('${heroImg}', '${header}', '${subHeader}', '${content}', NOW(), 0)`;
         console.log(query)
         client.query(query, (err,response) => {
             client.release();

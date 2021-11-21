@@ -118,6 +118,11 @@
     width: 250px;
     height: 30px;
     border-bottom: 1px solid gray;
+    color: black;
+}
+
+.userUpdateInput::placeholder{
+  color: rgba(155, 149, 149, 0.678);
 }
 
 .userUpdateRight{
@@ -146,9 +151,10 @@
 .userUpdateButton{
     border-radius: 5px;
     border: none;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
     background-color: darkblue;
     color: white;
     font-weight: 600;
+    margin-top: 5%;
 }

@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import EditIcon from '@mui/icons-material/Edit';
+import { modalStyle } from "../../utils/config";
 
 import FadingBalls from "react-cssfx-loading/lib/FadingBalls";
 
@@ -36,17 +37,6 @@ const Posts = (props) =>  {
     allowResizeX: true
 	}
 
-  const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;

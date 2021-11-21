@@ -1,125 +1,178 @@
 import {
   CalendarToday,
-  LocationSearching,
-  MailOutline,
   PermIdentity,
-  PhoneAndroid,
-  Publish,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
 import "./user.css";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import moment from 'moment';
+import FadingBalls from "react-cssfx-loading/lib/FadingBalls";
 
-export default function User() {
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import { modalStyle } from "../../utils/config";
+
+
+const User = (props) => {
+  const [isModal, setModal] = useState(false);
+  const [isErrorModal, setErrorModal] = useState(false);
+  const [isBadPassword, setBadPassword] = useState(false);
+
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+
+  const [data, setData] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    switch(name) {
+      case 'oldPassword':
+        setOldPassword(value);
+        break;
+      case 'newPassword':
+        setNewPassword(value);
+        break;
+    }
+  }
+
+  const handleSubmit = (e) => {
+    const data = {
+      oldPassword,newPassword, id:props.match.params.id
+    }
+
+
+    axios({
+      method: 'post',
+      url: '/user/update',
+      headers: {
+          'Content-Type': 'application/json',
+          'x-access-token' : localStorage.getItem('userToken')
+      },
+      data
+    }).then(res => {
+      if(res.status === 200 || res.status === '200') {
+        setModal(true);
+      } else if(res.status === 400 || res.status === '400') {
+        setModal(true)
+        setBadPassword(true);
+      }
+    }).catch(err => {
+      setErrorModal(true)
+      setModal(true);
+    })
+    e.preventDefault();
+    setTimeout(() => {
+        window.location.reload()
+    }, 1500)
+  }
+
+    const fetchData = async () => {
+      axios({
+        method: 'get',
+        url: `/user/fetch?id=${props.match.params.id}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token' : localStorage.getItem('userToken')
+        },
+    }).then(res => {
+      setLoading(false)
+      res.data.rows[0].dateCreated = moment(res.data.rows[0].dateCreated).format('L')
+      setData(res.data.rows[0]);
+      setLoading(false);
+    })
+    }
+
+    useEffect(() => {
+      setLoading(true);
+      fetchData();
+
+    }, [])
+
+    if(isLoading) {
+      return (
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}><FadingBalls color="#3a43cc" width="20px" height="20px" duration="2s" /></div>
+      )
+  } else {
   return (
     <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
     <Topbar/>
    <div style={{display: 'flex'}}>
     <Sidebar activeUsers/>
+
+    <div>
+      <Modal
+        open={isModal}
+        onClose={() => {setModal(false); setErrorModal(false)}}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={modalStyle}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {!isErrorModal && !isBadPassword ? <p style={{color: 'green'}}>Successfully changed user's password!</p> : <p style={{color: 'red'}}>Invalid credentials! <br/> or lost connection! Try again!</p>}
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+
     <div className="user">
       <div className="userTitleContainer">
         <h1 className="userTitle">Edit User</h1>
-        <Link to="/newUser">
-          <button className="userAddButton">Create</button>
-        </Link>
       </div>
       <div className="userContainer">
         <div className="userShow">
-          <div className="userShowTop">
-            <img
-              src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="userShowImg"
-            />
-            <div className="userShowTopTitle">
-              <span className="userShowUsername">Anna Becker</span>
-              <span className="userShowUserTitle">Software Engineer</span>
-            </div>
-          </div>
           <div className="userShowBottom">
             <span className="userShowTitle">Account Details</span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99</span>
+              <span className="userShowInfoTitle">{data.login}</span>
             </div>
             <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">10.12.1999</span>
-            </div>
-            <span className="userShowTitle">Contact Details</span>
-            <div className="userShowInfo">
-              <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">+1 123 456 67</span>
-            </div>
-            <div className="userShowInfo">
-              <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99@gmail.com</span>
-            </div>
-            <div className="userShowInfo">
-              <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">New York | USA</span>
+              <span className="userShowInfoTitle">{data.dateCreated}</span>
             </div>
           </div>
         </div>
         <div className="userUpdate">
-          <span className="userUpdateTitle">Edit</span>
+          <span className="userUpdateTitle">Change password</span>
           <form className="userUpdateForm">
             <div className="userUpdateLeft">
               <div className="userUpdateItem">
                 <label>Username</label>
                 <input
                   type="text"
-                  placeholder="annabeck99"
+                  value={data.login}
+                  disabled
                   className="userUpdateInput"
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Full Name</label>
+                <label>Old password</label>
                 <input
-                  type="text"
-                  placeholder="Anna Becker"
+                  onChange={handleChange}
+                  name="oldPassword"
+                  type="password"
+                  placeholder="******"
                   className="userUpdateInput"
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Email</label>
+                <label>New password</label>
                 <input
-                  type="text"
-                  placeholder="annabeck99@gmail.com"
+                  onChange={handleChange}
+                  name="newPassword"
+                  type="password"
+                  placeholder="******"
                   className="userUpdateInput"
                 />
               </div>
-              <div className="userUpdateItem">
-                <label>Phone</label>
-                <input
-                  type="text"
-                  placeholder="+1 123 456 67"
-                  className="userUpdateInput"
-                />
+              <div className="userUpdateRight">
+                <button onClick={handleSubmit} className="userUpdateButton">Update</button>
               </div>
-              <div className="userUpdateItem">
-                <label>Address</label>
-                <input
-                  type="text"
-                  placeholder="New York | USA"
-                  className="userUpdateInput"
-                />
-              </div>
-            </div>
-            <div className="userUpdateRight">
-              <div className="userUpdateUpload">
-                <img
-                  className="userUpdateImg"
-                  src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                  alt=""
-                />
-                <label htmlFor="file">
-                  <Publish className="userUpdateIcon" />
-                </label>
-                <input type="file" id="file" style={{ display: "none" }} />
-              </div>
-              <button className="userUpdateButton">Update</button>
             </div>
           </form>
         </div>
@@ -127,5 +180,7 @@ export default function User() {
     </div>
     </div>
     </div>
-  );
+  )};
 }
+
+export default User;

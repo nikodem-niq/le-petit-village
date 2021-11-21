@@ -21,8 +21,8 @@ const App = () => {
 
           <PrivateRoute path="/admin" component={Home}/>
           <PrivateRoute path="/users" component={UserList}/>
-          <PrivateRoute path="/user/:userId" component={User}/>
-          <PrivateRoute path="/newUser" component={NewUser}/>
+          <PrivateRoute path="/user/:id" component={User}/>
+          <PrivateRoute path="/new-user" component={NewUser}/>
           <PrivateRoute path="/posts" component={ProductList}/>
           <PrivateRoute path="/post/:articleId" component={Product}/>
           <PrivateRoute path="/new-post" component={NewProduct}/>

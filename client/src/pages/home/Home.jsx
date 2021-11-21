@@ -4,8 +4,43 @@ import "./home.css";
 import { userData } from "../../dummyData";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import moment from 'moment';
 
-export default function Home() {
+const Home = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+
+  const fetchData = async () => {
+    axios({
+      method: 'get',
+      url: `/articles/fetch`,
+      headers: {
+          'Content-Type': 'application/json',
+          'x-access-token' : localStorage.getItem('userToken')
+      },
+  }).then(res => {
+    setLoading(true);
+    res.data.map((row) => {
+      row['id'] = row.articleId;
+      row.date = moment(row.date).format('L')
+    })
+    setLoading(false);
+    setData(res.data);
+    setLoading(false);
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
+
+useEffect(() => {
+    setLoading(true);
+    fetchData();
+
+  }, [])
+
   return (
     <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
       <Topbar/>
@@ -13,7 +48,7 @@ export default function Home() {
       <Sidebar activeDashboard/>
     <div className="home">
       <FeaturedInfo />
-      <Chart data={userData} title="User Analytics" grid dataKey="Active User"/>
+      <Chart data={userData} title="Views Analytics" grid dataKey="Active User"/>
       <div className="homeWidgets">
       </div>
     </div>
@@ -21,3 +56,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

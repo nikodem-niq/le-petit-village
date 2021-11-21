@@ -5,6 +5,7 @@
 .newUserForm {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .newUserItem {
@@ -27,21 +28,11 @@
   padding: 10px;
   border: 1px solid gray;
   border-radius: 5px;
+  color: black;
 }
 
-.newUserGender > input {
-  margin-top: 15px;
-}
-
-.newUserGender>label{
-    margin: 10px;
-    font-size: 18px;
-    color: #555;
-}
-
-.newUserSelect{
-    height: 40px;
-    border-radius: 5px;
+.newUserItem > input::placeholder {
+  color: rgba(88, 88, 88, 0.384);
 }
 
 .newUserButton{

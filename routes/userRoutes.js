@@ -4,6 +4,7 @@ const pg = require('pg');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../utils/config');
+const {verifyToken} = require('../middlewares/auth');
 require('dotenv').config();
 
 const pool = new pg.Pool({
@@ -13,12 +14,92 @@ const pool = new pg.Pool({
     }
   });
 
+router.post('/delete', verifyToken, (req,res,next) => {
+const { id } = req.body;
+console.log(id);
+let query = `DELETE FROM users WHERE id = ${id}`;
+pool.connect().then((client) => {
+    client.query(query, (err,response) => {
+    console.log(query);
+    client.release();
+    if(err) {
+        res.status(403).send(err)
+    } else {
+        res.status(200).send(response);
+    }
+    })
+})
+})
+
+router.get('/fetch', verifyToken, (req,res,next) => {
+    pool.connect().then(client => {
+        let query;
+        if(req.query.id) {
+            query = `SELECT * FROM users WHERE id = ${req.query.id}`;
+        } else {
+            query = `SELECT * FROM users ORDER BY id ASC`;
+        }
+        client.query(query, (err,response) => {
+            client.release();
+            if(err) {
+                res.status(403).send(err);
+            } else {
+                res.status(200).send(response);
+            }
+        })
+    }).catch(err => {
+        res.status(403).send(err);
+    }) 
+})
+
+router.post('/update', (req,res,next) => {
+    pool.connect().then(client => {
+        let { oldPassword, newPassword, id } = req.body;
+        console.log(oldPassword,newPassword,id);
+        client.query(`SELECT password FROM users WHERE id = ${id}`, (err,response) => {
+            if(err) {
+                res.status(400).send(err)
+            } else {
+                bcrypt.compare(oldPassword,response.rows[0].password, (err, same) => {
+                    if(same) {
+                        bcrypt.genSalt(10, (err,salt) => {
+                            if(!err) {
+                                bcrypt.hash(newPassword, salt, (err, hashed) => {
+                                    if(err) {
+                                        res.status(400).send('err with hash');
+                                    } else {
+                                        // change user in db
+                                        client.query(`UPDATE users SET password = '${hashed}' WHERE id = ${id}`, (err, response) => {
+                                            if(err) {
+                                                res.status(400).send(err);
+                                            } else {
+                                                res.status(200).send(response);
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    } else {
+                        res.status(400).send(err);
+                    }
+                })
+            }
+            client.release();
+        })
+    }).catch(err => {
+        res.status(400).send(err);
+        client.release();
+    })
+})
 
   // User auth and register
-router.post('/register', async (req,res,next) => {
+router.post('/register', verifyToken, async (req,res,next) => {
     const { login, password }= req.body;
     pool.connect().then(client => {
-        client.query(`SELECT 'login' FROM "users" WHERE "login" LIKE '${login}'`).then(response => {
+        let query = `SELECT 'login' FROM "users" WHERE "login" LIKE '${login}'`;
+        console.log(query)
+        client.query(query).then(response => {
             client.release();
             if(!response.rowCount < 1) {
                 res.status(config.loginOrEmailExists.code).json(config.loginOrEmailExists.message)
@@ -43,6 +124,7 @@ router.post('/register', async (req,res,next) => {
                 })
             }
         }).catch(err => {
+            res.status(403).send(err)
             client.release();
         })
     });
