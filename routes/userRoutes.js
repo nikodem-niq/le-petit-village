@@ -8,7 +8,7 @@ const {verifyToken} = require('../middlewares/auth');
 require('dotenv').config();
 
 const pool = new pg.Pool({
-    connectionString: process.env.PGURI,
+    connectionString: process.env.DATABASE_URL,
     ssl: {
       rejectUnauthorized: false
     }

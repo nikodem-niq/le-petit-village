@@ -4,7 +4,7 @@ const pg = require('pg');
 const { verifyToken } = require('../../middlewares/auth');
 
 const pool = new pg.Pool({
-    connectionString: process.env.PGURI,
+    connectionString: process.env.DATABASE_URL,
     ssl: {
       rejectUnauthorized: false
     }
