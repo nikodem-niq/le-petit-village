@@ -125,7 +125,7 @@ router.post('/register', verifyToken, async (req,res,next) => {
             }
         }).catch(err => {
             res.status(403).send(err)
-            client.release();
+            // client.release();
         })
     });
 
@@ -143,7 +143,7 @@ router.post('/auth', (req,res,next) => {
                 res.status(config.badLoginOrPassword.code).json(config.badLoginOrPassword.message);
             } else {
                 client.query(`SELECT * FROM "users" WHERE "login" LIKE '${login}'`).then(response => {
-                    // client.release();
+                    client.release();
                     let encryptedPassword = response.rows[0].password;
                     bcrypt.compare(password, encryptedPassword, (err, same) => {
                         if(same) {
@@ -154,13 +154,13 @@ router.post('/auth', (req,res,next) => {
                         }
                     })
                 }).catch(err => {
-                    client.release();
+                    // client.release();
                     console.log(err);
                 })
             }
         });
     }).catch(err => {
-        client.release();
+        // client.release();
         console.log(err);
     });
 
