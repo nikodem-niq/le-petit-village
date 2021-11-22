@@ -1,0 +1,48 @@
+.menuWrapper {
+    font-family: 'Scada', sans-serif;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.menuWrapper > ul {
+    display: none;
+}
+
+#hamburger {
+    width: 8%;
+    height: auto;
+    margin: 0 1%;
+}
+
+@media screen and (min-width: 769px) {
+
+    #hamburger { 
+        display: none;
+    }
+
+    #headerTitle {
+        position: relative;
+        left: 2.5%;
+    }
+
+    .menuWrapper > ul {
+        position: relative;
+        right: 20%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .menuWrapper > ul > a {
+        text-decoration: none;
+        margin: 0 2vw;
+        color: white;
+        font-size: 1.45em;
+    }
+
+    #donateBtn {
+        position: relative;
+        right: 10%;
+    }
+}

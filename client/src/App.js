@@ -1,12 +1,15 @@
 import "./App.css";
 import Home from "./pages/home/Home";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/postsList/PostsList";
 import Product from "./pages/posts/Posts";
 import NewProduct from "./pages/newPost/NewPost";
+
+
+import AuroraHome from "./pages/AURORA--WEBSITE/home/AuroraHome";
 
 import PrivateRoute from './components/auth/PrivateRoute';
 import Login from "./components/auth/Login";
@@ -29,6 +32,8 @@ const App = () => {
 
 
           {/* Website */}
+
+          <Route path="/" component={AuroraHome}/>
         </Switch>
     </Router>
   );
