@@ -64,17 +64,18 @@ const NavMobile = styled.div`
 `
 
 const NavWrapper = styled.nav`
+    z-index: 999;
     position: absolute;
     font-family: 'Roboto', sans-serif;
-    /* font-weight: 100; */
-    font-size: 0.75rem;
+    /* font-weight: 900; */
+    font-size: 0.95rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 10vh;
     color: white;
-    background-color: #75757571;
+    /* background-color: #75757571; */
 
     ${props => props.news ? 'color: red' : 'color: white'}
 `

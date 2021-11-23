@@ -38,7 +38,7 @@ const Home = () => {
 useEffect(() => {
     setLoading(true);
     fetchData();
-
+    setLoading(false);
   }, [])
 
   return (
