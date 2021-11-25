@@ -1,0 +1,22 @@
+.readMoreBtn {
+    background-color: #198A75;
+    color: white;
+    border: none;
+    padding: 3%;
+    border-radius: 10px;
+    margin: 1% 0;
+}
+
+@media screen and (max-width: 768px) {
+    #heroWrapperComponent {
+        display: none;
+    }
+
+    #heroWrapperMobile {
+        display: flex;
+    }
+
+    /* .heroWrapperComponent > #sliderWrapper {
+        height: 100%;
+    } */
+}
