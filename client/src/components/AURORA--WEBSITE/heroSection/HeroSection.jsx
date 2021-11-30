@@ -23,7 +23,7 @@ const HeroSection = () => {
     const fetchData = () => {
         axios({
           method: 'get',
-          url: `/articles/fetch`,
+          url: `/programs/fetch`,
           headers: {
               'Content-Type': 'application/json',
               'x-access-token' : localStorage.getItem('userToken')

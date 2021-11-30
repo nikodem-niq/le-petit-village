@@ -1,13 +1,16 @@
 √ dodawanie programu (price, duration) ->
     √ dodanie wydarzenia na konkretny termin (limit ile osob, która godzina) -> 
         dodanie rezerwacji przez uzytkownika (imie itd. ) ->
-            platność vcc / zwykly manualny przelew
+            platność vcc / zwykly manualny przelew (Stripe / paypal)
 
 ****
 
 update programs
 RESERVATIONS FRONT-END
 RESERVATIONS Back-end
+
+FRONT-END payment stripe
+FRONT-END form / cards for reservation
 
 ****
 

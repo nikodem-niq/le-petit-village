@@ -2,6 +2,7 @@ import './Reservation.css';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Reservation = () => {
     const [isLoading, setLoading] = useState(true);
@@ -48,7 +49,7 @@ const Reservation = () => {
                             <h4>{el.subHeader}</h4>
                             <p>{el.duration} min. </p>
                             <p> £{el.cost} </p>
-                            <button onClick={() => {console.log(el.programId)}} class="bookBtn">Book now!</button>
+                            <Link style={{textDecoration: 'none', height: '100%', padding: '5%'}} to={`/booking/${el.programId}`}><button>Book now!</button></Link>
                         </TextCard>
                     </ProgramCard>
                 )

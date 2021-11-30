@@ -14,7 +14,7 @@ router.get('/fetch', (req,res,next) => {
     pool.connect().then(client => {
         let query;
         if(req.query.programId) {
-            query = `SELECT * FROM programs WHERE "programId" = ${req.query.programId}`
+            query = `SELECT * FROM books WHERE "programId" = ${req.query.programId}`
         } else {
             query = `SELECT * FROM programs ORDER BY "programId"`;
         }

@@ -18,6 +18,7 @@ import Auth from "./components/auth/Auth";
 import BooksList from "./pages/booking/BooksList";
 import NewBook from "./pages/booking/NewBook";
 import Reservations from "./pages/reservations/Reservations";
+import ReservationPage from "./pages/AURORA--WEBSITE/home/ReservationPage";
 
 const App = () => {
   return (
@@ -43,6 +44,8 @@ const App = () => {
 
           {/* Website */}
 
+          <Route path="/booking/:id" component={ReservationPage}/>
+          <Route path="/booking" component={ReservationPage}/>
           <Route path="/" component={AuroraHome}/>
         </Switch>
     </Router>

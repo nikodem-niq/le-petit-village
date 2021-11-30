@@ -1,8 +1,42 @@
 .reservationWrapper {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    /* flex-direction: column; */
     height: 100vh;
+}
+
+.reservationInput {
+    width: 30%;
+    color: black;
+    border: 1px solid black;
+}
+
+.reservationWrapper--when {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.availableReservation {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.availableReservation div {
+    width: 100%;
+    padding: 5%;
+    height: auto;
+}
+
+.activeReservation {
+    background-color: rgb(156, 156, 156);
 }
 
 .bookBtn {
