@@ -45,8 +45,8 @@ const HeroSection = () => {
             <div className="imgOpacity"></div>
             <HeroWrapper id="heroWrapperComponent">
                 <div id="heroWrapper">
-                <h1>{ data && data[currentlyNews-1].header}</h1>
-                <h2>{data && data[currentlyNews-1].subHeader}</h2>
+                <h1>{ data && data[currentlyNews-1].header ? data[3].header : ''}</h1>
+                <h2>{data && data[currentlyNews-1].subHeader ? data[3].subHeader : ''}</h2>
                 <button className="readMoreBtn">Read more..</button>
                 </div>
                 <div id="sliderWrapper">

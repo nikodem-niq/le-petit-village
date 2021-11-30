@@ -13,20 +13,10 @@ const pool = new pg.Pool({
 router.get('/fetch', (req,res,next) => {
     pool.connect().then(client => {
         let query;
-        if(req.query.articleId) {
-            query = `SELECT * FROM articles WHERE "articleId" = ${req.query.articleId}`
+        if(req.query.programId) {
+            query = `SELECT * FROM programs WHERE "programId" = ${req.query.programId}`
         } else {
-            query = `SELECT * FROM articles ORDER BY "articleId"`;
-        }
-        if(req.query.view) {
-            let viewQuery = `UPDATE articles SET views = views + 1 WHERE "articleId" = ${req.query.articleId}`;
-            client.query(viewQuery, (err,response) => {
-                if(err) {
-                    console.log(err);
-                } else {
-                    res.status(200).send(response);
-                }
-            });
+            query = `SELECT * FROM programs ORDER BY "programId"`;
         }
         console.log(query)
         client.query(query, (err,response) => {
@@ -42,8 +32,8 @@ router.get('/fetch', (req,res,next) => {
 
 router.post('/post', verifyToken, (req,res,next) => {
     pool.connect().then(client => {
-        const { heroImg, header, subHeader, content } = req.body;
-        let query = `INSERT INTO articles("heroImg", header, "subHeader", content, date, views) VALUES ('${heroImg}', '${header}', '${subHeader}', '${content}', NOW(), 0)`;
+        const { heroImg, header, subHeader, content, duration, cost } = req.body;
+        let query = `INSERT INTO programs("heroImg", header, "subHeader", content, duration, cost) VALUES ('${heroImg}', '${header}', '${subHeader}', '${content}', ${duration}, ${cost})`;
         console.log(query)
         client.query(query, (err,response) => {
             client.release();
@@ -75,7 +65,7 @@ router.post('/update', verifyToken, (req,res,next) => {
 router.post('/delete', verifyToken, (req,res,next) => {
     const { id } = req.body;
     console.log(id);
-    let query = `DELETE FROM articles WHERE "articleId" = ${id}`;
+    let query = `DELETE FROM programs WHERE "programId" = ${id}`;
     pool.connect().then((client) => {
       client.query(query, (err,response) => {
         console.log(query);

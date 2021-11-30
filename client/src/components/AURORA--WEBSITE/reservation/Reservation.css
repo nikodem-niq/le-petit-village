@@ -1,0 +1,20 @@
+.reservationWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.bookBtn {
+    padding: 2%;
+    width: 50%;
+    height: 20%;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(32, 31, 31);
+    color: white;
+    border: none;
+    cursor: pointer;
+}

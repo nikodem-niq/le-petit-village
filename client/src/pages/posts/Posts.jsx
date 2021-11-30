@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import moment from 'moment';
 import { Link } from "react-router-dom";
 import "./posts.css";
 import JoditEditor from 'jodit-react';
@@ -31,6 +30,8 @@ const Posts = (props) =>  {
     const [header, setHeader] = useState('');
     const [subHeader, setSubHeader] = useState('');
     const [content, setContent] = useState('')
+    const [duration, setDuration] = useState(0)
+    const [cost, setCost] = useState(0)
 
     const config = {
 		readonly: false,
@@ -51,12 +52,18 @@ const Posts = (props) =>  {
       case 'subHeader':
         setSubHeader(value);
         break;
+      case 'duration':
+        setDuration(parseInt(value));
+        break;
+      case 'cost':
+        setCost(parseInt(value));
+        break;
     }
   }
 
   const handleSubmit = (e) => {
     const data = {
-      heroImg, header, subHeader, content, id: props.match.params.articleId
+      heroImg, header, subHeader, content, duration, cost, id: props.match.params.articleId
     }
 
 
@@ -85,15 +92,14 @@ const Posts = (props) =>  {
     const fetchData = async () => {
         axios({
           method: 'get',
-          url: `/articles/fetch?articleId=${props.match.params.articleId}`,
+          url: `/programs/fetch?programId=${props.match.params.programId}`,
           headers: {
               'Content-Type': 'application/json',
               'x-access-token' : localStorage.getItem('userToken')
           },
       }).then(res => {
         res.data.map((row) => {
-          row['id'] = row.articleId;
-          row.date = moment(row.date).format('L')
+          row['id'] = row.programId;
         })
         setLoading(false)
         setData(res.data[0]);
@@ -140,7 +146,7 @@ const Posts = (props) =>  {
       <form className="addProductForm">
         <div className="productTopRight">
                 <EditIcon/>
-                <span className="productName"> You're editing post no. {data.articleId}</span>
+                <span className="productName"> You're editing post no. {data.programId}</span>
             <div className="productInfoBottom">
             </div>
         </div>
@@ -169,6 +175,16 @@ const Posts = (props) =>  {
           tabIndex={1} // tabIndex of textarea
           onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
         />
+        </div>
+
+        <div className="addProductItem">
+          <label>Duration</label>
+          <input type="number" onBlur={handleChange} id="duration" name="duration" placeholder="Duration.. (in minutes)" required/>
+        </div>
+
+        <div className="addProductItem">
+          <label>Cost</label>
+          <input type="number" onBlur={handleChange} id="cost" name="cost" placeholder="Cost.." required/>
         </div>
 
         <button className="addProductButton" onClick={handleSubmit}>Edit post </button>

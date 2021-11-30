@@ -22,6 +22,8 @@ export default function NewProduct() {
   const [header, setHeader] = useState('');
   const [subHeader, setSubHeader] = useState('');
 	const [content, setContent] = useState('')
+	const [duration, setDuration] = useState(0)
+	const [cost, setCost] = useState(0)
 	
 	const config = {
 		readonly: false,
@@ -41,19 +43,25 @@ export default function NewProduct() {
       case 'subHeader':
         setSubHeader(value);
         break;
+      case 'duration':
+        setDuration(parseInt(value));
+        break;
+      case 'cost':
+        setCost(parseInt(value));
+        break;
     }
   }
 
 
   const handleSubmit = (e) => {
     const data = {
-      heroImg, header, subHeader, content
+      heroImg, header, subHeader, content, duration, cost
     }
 
 
     axios({
       method: 'post',
-      url: '/articles/post',
+      url: '/programs/post',
       headers: {
           'Content-Type': 'application/json',
           'x-access-token' : localStorage.getItem('userToken')
@@ -88,7 +96,7 @@ export default function NewProduct() {
       >
         <Box sx={modalStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {!isErrorModal ? <p style={{color: 'green'}}>Successfully added post!</p> : <p style={{color: 'red'}}>Connection lost! Try again</p>}
+            {!isErrorModal ? <p style={{color: 'green'}}>Successfully added program!</p> : <p style={{color: 'red'}}>Connection lost! Try again</p>}
           </Typography>
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
@@ -99,7 +107,7 @@ export default function NewProduct() {
 
 
     <div className="newProduct">
-      <h1 className="addProductTitle">New Post</h1>
+      <h1 className="addProductTitle">New Program</h1>
       <form className="addProductForm">
 
       <div className="addProductItem">
@@ -126,6 +134,16 @@ export default function NewProduct() {
           tabIndex={1} // tabIndex of textarea
           onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
         />
+        </div>
+
+        <div className="addProductItem">
+          <label>Duration</label>
+          <input type="number" onBlur={handleChange} id="duration" name="duration" placeholder="Duration.. (in minutes)" required/>
+        </div>
+
+        <div className="addProductItem">
+          <label>Cost</label>
+          <input type="number" onBlur={handleChange} id="cost" name="cost" placeholder="Cost.." required/>
         </div>
 
         <button className="addProductButton" onClick={handleSubmit}>New post </button>

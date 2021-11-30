@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const OfferSection = () => {
     return (
-        <OfferWrapper>
+        <OfferWrapper id="offerWrapper">
             <OfferHeader>What we offer?</OfferHeader>
             <OfferCard>1</OfferCard>
             <OfferCard>2</OfferCard>

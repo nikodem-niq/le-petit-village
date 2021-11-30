@@ -1,4 +1,3 @@
-import "./posts.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
@@ -6,14 +5,16 @@ import { useState, useEffect } from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import axios from "axios";
-import moment from 'moment';
 
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
+import moment from 'moment';
 
-const PostsList = (props) => {
+
+
+const BooksList = (props) => {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
@@ -24,14 +25,15 @@ const PostsList = (props) => {
     const fetchData = async () => {
       axios({
         method: 'get',
-        url: `/programs/fetch`,
+        url: `/booking/fetch`,
         headers: {
             'Content-Type': 'application/json',
             'x-access-token' : localStorage.getItem('userToken')
         },
     }).then(res => {
       res.data.map((row) => {
-        row['id'] = row.programId;
+        row['id'] = row.bookId;
+        row['date'] = moment(row['date']).format('LL')
       })
       setData(res.data);
       console.log(data);
@@ -62,7 +64,7 @@ const PostsList = (props) => {
   const handleDelete = (id) => {
     axios({
       method: 'post',
-      url: '/programs/delete',
+      url: '/booking/delete',
       headers: {
           'Content-Type': 'application/json',
           'x-access-token' : localStorage.getItem('userToken')
@@ -81,32 +83,23 @@ const PostsList = (props) => {
 
 
   const columns = [
-    { field: "programId", headerName: "ID", width: 100 },
+    { field: "bookId", headerName: "Book ID", width: 150 },
     {
-      field: "heroImg",
-      headerName: "Image",
+      field: "date",
+      headerName: "Date",
       width: 150,
     },
     {
-      field: "header",
-      headerName: "Header",
+      field: "hour",
+      headerName: "Hour",
       width: 150,
     },
-    { field: "subHeader", headerName: "Sub Header", width: 150 },
+    { field: "currentlyReservated", headerName: "Currently reservated", width: 150 },
+    { field: "limit", headerName: "Limit", width: 150 },
     {
-      field: "content",
-      headerName: "Content",
-      width: 200,
-    },
-    {
-      field: "duration",
-      headerName: "Duration",
-      width: 150,
-    },
-    {
-      field: "cost",
-      headerName: "Cost",
-      width: 150,
+      field: "programId",
+      headerName: "Which program? (Its ID)",
+      width: 250,
     },
     {
       field: "action",
@@ -115,7 +108,7 @@ const PostsList = (props) => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/program/" + params.row.id}>
+            <Link to={"/booking/" + params.row.id}>
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
@@ -132,7 +125,7 @@ const PostsList = (props) => {
     <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
     <Topbar/>
     <div style={{display: 'flex'}}>
-    <Sidebar activePostsList/>
+    <Sidebar activeBookList/>
     <div className="productList">
 
     <div>
@@ -144,7 +137,7 @@ const PostsList = (props) => {
       >
         <Box sx={modalStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {!isErrorModal ? <p style={{color: 'green'}}>Successfully <b>DELETED</b> program!</p> : <p style={{color: 'red'}}>Connection lost! Try again</p>}
+            {!isErrorModal ? <p style={{color: 'green'}}>Successfully <b>DELETED</b> book!</p> : <p style={{color: 'red'}}>Connection lost! Try again</p>}
           </Typography>
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
@@ -167,4 +160,4 @@ const PostsList = (props) => {
   );
 }
 
-export default PostsList;
+export default BooksList;

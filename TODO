@@ -1,7 +1,15 @@
-modal po dodaniu nowego postu -- DONE
-działanie VIEWS po stronie serwera i clienta
-usery - kto dodal konkretny post
+√ dodawanie programu (price, duration) ->
+    √ dodanie wydarzenia na konkretny termin (limit ile osob, która godzina) -> 
+        dodanie rezerwacji przez uzytkownika (imie itd. ) ->
+            platność vcc / zwykly manualny przelew
 
+****
+
+update programs
+RESERVATIONS FRONT-END
+RESERVATIONS Back-end
+
+****
 
 prezentacja:
 

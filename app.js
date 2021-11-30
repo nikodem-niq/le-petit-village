@@ -16,14 +16,20 @@ app.use('/mailing', mailingRoutes);
 const userRoutes = require('./routes/userRoutes');
 app.use('/user', userRoutes);
 
-const articlesRoutes = require('./routes/articles/articles');
-app.use('/articles', articlesRoutes);
+const programsRoutes = require('./routes/programs/programs');
+app.use('/programs', programsRoutes);
+
+const bookingRoutes = require('./routes/books/books');
+app.use('/booking', bookingRoutes)
+
+const reservationsRoutes = require('./routes/reservations/reservations');
+app.use('/reservations', reservationsRoutes);
 
 // if(process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-    app.get('*', (req,res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    })
+    // app.use(express.static('client/build'));
+    // app.get('*', (req,res) => {
+    //     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    // })
   // }
 
 app.listen(port, () => {
