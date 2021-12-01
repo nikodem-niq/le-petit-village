@@ -7,6 +7,7 @@
     height: auto;
     width: 100%;
     background-color: #F2EFE6;
+    z-index: 999;
 }
 
 .cardWrapper {
@@ -28,10 +29,18 @@
 .reservationWrapper--when {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     height: 100vh;
+    background-color: #F2EFE6;
+}
+
+.reservationWrapper--header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
 }
 
 .availableReservation {

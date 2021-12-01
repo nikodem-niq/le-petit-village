@@ -27,7 +27,7 @@ const Navbar = () => {
                     <Link to="#">Opening</Link>
                     <Link to="#">Contact</Link>
                 </ul>
-            <DonateButton id="donateBtn"><b>RESERVATION</b></DonateButton>
+                <Link to="/booking" id="donateLink"><DonateButton id="donateBtn">RESERVATION</DonateButton></Link>
             </div>
                     {isOpenMenu ? <NavMobile>
                     <ul className="navMobileList">
@@ -94,7 +94,12 @@ const DonateButton = styled.button`
     padding: 1em;
     border: none;
     border-radius: 20px;
-    /* margin: 0 1%; */
+    cursor: pointer;
+    font-weight: bold;
+
+    #donateLink .donateButton {
+        text-decoration: none;
+    }
 `
 
 export default Navbar;

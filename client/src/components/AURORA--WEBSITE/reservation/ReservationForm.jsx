@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import Navbar from '../navbar/Navbar';
 
 const ReservationForm = (props) => {
     const [isLoading, setLoading] = useState(true);
@@ -52,9 +53,14 @@ const ReservationForm = (props) => {
       switch(formStep) {
           case 0:
             return (
+                <>
+                <Navbar/>
                 <div className="reservationWrapper--when">
-                    <Link to="/booking">Back</Link>
-                    <h1>Dostępne terminy</h1>
+                    <div className="reservationWrapper--header">
+                        <Link to="/booking">Back</Link>
+                        <Header>Schedule Online</Header>
+
+                    </div>
                     <div className="availableReservation">
                         {data.map((el) => {
                             return(
@@ -73,6 +79,7 @@ const ReservationForm = (props) => {
                                     </TextCard>
                     </div>
                 </div>
+                </>
             )
         case 1:
             return (
@@ -108,6 +115,10 @@ const TextCard = styled.div`
     height: 100%;
     justify-content: center;
     align-items: center;
+`
+
+const Header = styled.h1`
+    font-size: 2em;
 `
 
 export default ReservationForm;
