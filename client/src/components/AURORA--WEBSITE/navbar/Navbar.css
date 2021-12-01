@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+
 }
 
 .menuWrapper > ul {
@@ -15,7 +16,23 @@
     margin: 0 1%;
 }
 
+.logoWrapper {
+    width: 25vw;
+}   
+
+.logoWrapper img {
+    width: 100%;
+    height: auto;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
 @media screen and (min-width: 769px) {
+    
+    .logoWrapper img {
+        width: 100%;
+        height: auto;
+    }
 
     #hamburger { 
         display: none;
@@ -37,12 +54,32 @@
     .menuWrapper > ul > a {
         text-decoration: none;
         margin: 0 2vw;
-        color: white;
+        color: black;
         font-size: 1.45em;
     }
 
     #donateBtn {
         position: relative;
         right: 10%;
+        width: 10vw;
+        font-size: 1vw;
+    }
+
+    #donateBtn:hover::after {
+        transform: translate(5%,9%);
+        width: 98%;
+    }
+
+    #donateBtn::after {
+        bottom: 9%;
+        right: 5%;
+        content: '';
+        position: absolute;
+        width: 95%;
+        height: 90%;
+        border: 2px solid black;
+        border-radius: 20px;
+
+        transition: all 0.2s ease-in-out;
     }
 }

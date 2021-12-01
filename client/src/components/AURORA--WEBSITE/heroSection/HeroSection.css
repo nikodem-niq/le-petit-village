@@ -7,6 +7,25 @@
     margin: 1% 0;
 }
 
+.heroGirl img {
+    height: 75vh;
+    width: 50vw;
+}
+
+.heroGirlStroke {
+    position: absolute;
+    width: 100%;
+    height: 85vh;
+    left: 10%;
+}
+
+.heroWrapperComponent {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 768px) {
     #heroWrapperComponent {
         display: none;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import './Navbar.css'
+import logo from '../../../img/logo.svg';
 import { useEffect, useState } from 'react';
 
 const Navbar = () => {
@@ -15,22 +16,25 @@ const Navbar = () => {
     return (
         <NavWrapper>
             <MenuIcon id="hamburger" onClick={handleOpenMenu}/>
-            <h2 id="headerTitle"><b>AURORA</b> Counselling</h2>
+            {/* <h2 id="headerTitle"><b>Services</b> Counselling</h2> */}
+            <div className="logoWrapper">
+                <img src={logo}/>
+            </div>
             <div className="menuWrapper">
                 <ul>
-                    <Link to="#">News</Link>
-                    <Link to="#">Aurora</Link>
-                    <Link to="#">About</Link>
-                    <Link to="#">Team</Link>
+                    <Link to="#">Home</Link>
+                    <Link to="#">Services</Link>
+                    <Link to="#">Opening</Link>
+                    <Link to="#">Contact</Link>
                 </ul>
-            <DonateButton id="donateBtn"><b>DONATE</b></DonateButton>
+            <DonateButton id="donateBtn"><b>RESERVATION</b></DonateButton>
             </div>
                     {isOpenMenu ? <NavMobile>
                     <ul className="navMobileList">
-                    <Link to="#">News</Link>
-                    <Link to="#">Aurora</Link>
-                    <Link to="#">About</Link>
-                    <Link to="#">Team</Link>
+                    <Link to="#">Home</Link>
+                    <Link to="#">Services</Link>
+                    <Link to="#">Opening</Link>
+                    <Link to="#">Contact</Link>
                     </ul>
                     </NavMobile> : ''}
         </NavWrapper>
@@ -44,7 +48,6 @@ const NavMobile = styled.div`
     background-color: #000000;
     opacity: 0.3;
     width: 100%;
-    height: 90vh;
 
     .navMobileList {
         display: flex;
@@ -65,9 +68,8 @@ const NavMobile = styled.div`
 
 const NavWrapper = styled.nav`
     z-index: 999;
-    position: absolute;
+    position: relative;
     font-family: 'Roboto', sans-serif;
-    /* font-weight: 900; */
     font-size: 0.95rem;
     display: flex;
     justify-content: space-between;
@@ -75,9 +77,8 @@ const NavWrapper = styled.nav`
     width: 100%;
     height: 10vh;
     color: white;
-    /* background-color: #75757571; */
 
-    ${props => props.news ? 'color: red' : 'color: white'}
+    background-color: #F2EFE6;
 `
 
 const DonateButton = styled.button`

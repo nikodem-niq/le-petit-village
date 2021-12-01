@@ -1,93 +1,53 @@
 import styled from 'styled-components';
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
 import FadingBalls from 'react-cssfx-loading/lib/FadingBalls';
 import './HeroSection.css'
 
+import heroGirl from '../../../img/girlHero.svg';
+import heroGirlStroke from '../../../img/girlHeroStroke.svg';
+
 
 const HeroSection = () => {
-    const [currentlyNews, setCurrentlyNews] = useState(1)
-    const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
-    
-    // Hero section
-    // const [heroHeader, setHeroHeader] = useState('');
-    // const [subHeader, setSubHeader] = useState('');
+    const [isLoading, setLoading] = useState(false);
 
-
-    useEffect(() => {
-        setLoading(true);
-        fetchData();
-    }, [])
-
-    const fetchData = () => {
-        axios({
-          method: 'get',
-          url: `/programs/fetch`,
-          headers: {
-              'Content-Type': 'application/json',
-              'x-access-token' : localStorage.getItem('userToken')
-          },
-      }).then(res => {
-        setData(res.data);
-        setLoading(false);
-    })
-      }
-
-      if(isLoading || !data) {
-        fetchData();
+      if(isLoading) {
         return (
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}><FadingBalls color="#3a43cc" width="20px" height="20px" duration="2s" /></div>
         )
     } else {
     return (
-        <ImgWrapper>
+        <Wrapper>
             <div className="imgOpacity"></div>
             <HeroWrapper id="heroWrapperComponent">
                 <div id="heroWrapper">
-                <h1>{ data && data[currentlyNews-1].header ? data[3].header : ''}</h1>
-                <h2>{data && data[currentlyNews-1].subHeader ? data[3].subHeader : ''}</h2>
-                <button className="readMoreBtn">Read more..</button>
+                    <h1>header</h1>
+                    <h2>sub header</h2>
+                    <button className="readMoreBtn">Read more..</button>
                 </div>
-                <div id="sliderWrapper">
-                    <div onClick={() => setCurrentlyNews(1)} className={currentlyNews == 1 ? 'activeSlider sliderIcon' : 'sliderIcon'}></div>
-                    <div onClick={() => setCurrentlyNews(2)} className={currentlyNews == 2 ? 'activeSlider sliderIcon' : 'sliderIcon'}></div>
-                    <div onClick={() => setCurrentlyNews(3)} className={currentlyNews == 3 ? 'activeSlider sliderIcon' : 'sliderIcon'}></div>
+
+                <div className="heroGirl">
+                    <img src={heroGirl}/>
+                </div>
+                <div className="heroGirlStroke">
+                    <img className="heroGirlStroke" src={heroGirlStroke}/>
                 </div>
             </HeroWrapper>
+
             <HeroWrapperMobile id="heroWrapperMobile">
-            <div id="sliderWrapper">
-                    <div onClick={() => setCurrentlyNews(1)} className={currentlyNews == 1 ? 'activeSlider sliderIcon' : 'sliderIcon'}></div>
-                    <div onClick={() => setCurrentlyNews(2)} className={currentlyNews == 2 ? 'activeSlider sliderIcon' : 'sliderIcon'}></div>
-                    <div onClick={() => setCurrentlyNews(3)} className={currentlyNews == 3 ? 'activeSlider sliderIcon' : 'sliderIcon'}></div>
-                </div>
             <div id="heroWrapper">
-                <h1>{ data && data[currentlyNews-1].header}</h1>
-                <h2>{data && data[currentlyNews-1].subHeader}</h2>
+                <h1>header</h1>
+                <h2>sub header</h2>
                 <center><button className="readMoreBtn">Read more..</button></center>
                 </div>
             </HeroWrapperMobile>
-        </ImgWrapper>
+        </Wrapper>
     )}
 }
 
-const ImgWrapper = styled.div`
+const Wrapper = styled.div`
     height: 100vh;
     width: 100vw;
-    background-image: url('https://i.imgur.com/HTencre.jpg');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-
-    .imgOpacity {
-        position: absolute;
-        z-index: 3;
-        background-color: #99905e;
-        opacity: 0.1;
-        width: 100%;
-        height: 100%;
-    }
+    background: #E5D6AC;
 `
 
 const HeroWrapperMobile = styled.div`
@@ -107,7 +67,7 @@ const HeroWrapperMobile = styled.div`
     #heroWrapper {
         width: 80%;
         color: white;
-        /* margin-bottom: 5%; */
+        height: auto;
         background-color: #5555557b;
         padding: 4%;
         border-top-left-radius: 20px;
@@ -148,12 +108,12 @@ const HeroWrapper = styled.div`
     z-index: 5;
     display: flex;
     position: relative;
-    top: 35%;
+    /* top: 35%; */
     justify-content: space-between;
     margin: auto;
     align-items: center;
     width: 90%;
-    height: 30vh;
+    height: 100vh;
     /* background-color: red; */
     font-size: 0.8em;
 

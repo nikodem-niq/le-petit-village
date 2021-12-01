@@ -1,10 +1,22 @@
 .reservationWrapper {
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    /* flex-direction: column; */
-    height: 100vh;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    background-color: #F2EFE6;
+}
+
+.cardWrapper {
+    /* margin-top: 5%; */
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .reservationInput {

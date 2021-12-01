@@ -10,7 +10,7 @@ const AuroraHome = () => {
         <div>
             <Navbar/>
             <HeroSection/>
-            <OfferSection/>
+            {/* <OfferSection/> */}
         </div>
     )
 }
