@@ -61,7 +61,7 @@ const Reservation = () => {
                             </div>
                         </TextCard>
                         <PriceCard>
-                            <PriceHeader> {el.cost}£ </PriceHeader>
+                            <PriceHeader className='priceCard'> {el.cost}£ </PriceHeader>
                             <Link to={`/booking/${el.programId}`}><BookButton>Book now!</BookButton></Link>
                         </PriceCard>
                     </ProgramCard>
@@ -133,8 +133,10 @@ const PriceCard = styled.div`
     bottom: 10%;
     width: 80%;
     height: 20%;
-    justify-content: space-evenly;
+    right: 15%;
+    justify-content: space-between;
     align-items: center;
+    
 `
 
 const BookButton = styled.button`
@@ -150,7 +152,7 @@ const BookButton = styled.button`
 `
 
 const PriceHeader = styled.h2`
-    font-size: 5em;
+    font-size: 8em;
 `
 
 

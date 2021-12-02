@@ -77,8 +77,8 @@ const NavWrapper = styled.nav`
     width: 100%;
     height: 10vh;
     color: white;
-
-    background-color: #F2EFE6;
+    background-color: #E5D6AC;
+    
 `
 
 const DonateButton = styled.button`
