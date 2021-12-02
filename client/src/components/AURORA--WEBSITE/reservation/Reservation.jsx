@@ -7,7 +7,7 @@ import cardOfProgram from '../../../img/cardOfProgram.svg'
 import FadingBalls from 'react-cssfx-loading/lib/FadingBalls';
 
 const Reservation = () => {
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -23,8 +23,9 @@ const Reservation = () => {
           res.data.map((row) => {
             row['id'] = row.reservationId;
           })
+          setLoading(false)
           setData(res.data);
-          console.log(res.data);
+          setLoading(false)
         }).catch(err => {
           console.log(err);
         })
@@ -32,6 +33,9 @@ const Reservation = () => {
     
         fetchData().then(() => {
           setLoading(false);
+        }).catch(err => {
+            setLoading(true)
+            console.log(err)
         })
     
       }, [isLoading])
@@ -47,7 +51,7 @@ const Reservation = () => {
             <Header>Make a reservation</Header>
             <SubHeader>funding of sessions</SubHeader>
             <div className="cardWrapper">
-            {data.map((el) => {
+            {data || !isLoading ? data.map((el) => {
                 return (
                     <ProgramCard duration={el.duration}>
                         <TextCard>
@@ -62,7 +66,8 @@ const Reservation = () => {
                         </PriceCard>
                     </ProgramCard>
                     )
-                })}
+                }) :             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}><FadingBalls color="#3a43cc" width="20px" height="20px" duration="2s" /></div>
+}
                 </div>
         </div>
     )}

@@ -15,7 +15,8 @@ router.get('/fetch', (req,res,next) => {
         let query;
         if(req.query.bookId) {
             query = `SELECT * FROM books WHERE "bookId" = ${req.query.bookId}`
-        } else {
+        }
+        else {
             query = `SELECT * FROM books ORDER BY "bookId"`;
         }
         console.log(query)

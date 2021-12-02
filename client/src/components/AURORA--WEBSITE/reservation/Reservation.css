@@ -28,12 +28,48 @@
 
 .reservationWrapper--when {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     /* justify-content: center; */
     align-items: center;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     background-color: #F2EFE6;
+}
+
+
+.reservationWrapper--who {
+    display: flex;
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    background-color: #F2EFE6;
+}
+
+
+.reservationWrapper--who input {
+    width: 30%;
+    color: black;
+    padding: 1%;
+    margin: 1% 0;
+}
+
+.reservationWrapper--who input::placeholder {
+    color: rgba(0, 0, 0, 0.356);
+}
+
+
+
+
+.reservationWrapper--payment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%; 
+    height: auto;
+    margin: 7% 0;
 }
 
 .reservationWrapper--header {
@@ -41,23 +77,37 @@
     justify-content: center;
     align-items: center;
     width: 100%; 
+    margin-top: 7%;
 }
 
 .availableReservation {
+    position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 80%;
+    justify-content: space-around;
     align-items: center;
+    z-index: 999;
 }
 
 .availableReservation div {
-    width: 100%;
-    padding: 5%;
+    position: relative;
+    width: 10%;
+    padding: 2%;
     height: auto;
+    font-size: 1.2em;
+    display: flex;
+    flex: 2 2 25%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-shadow: black 1px 1px 0.3px 2px;
 }
 
 .activeReservation {
-    background-color: rgb(156, 156, 156);
+    background-color: #E5D6AC;
 }
 
 .bookBtn {
