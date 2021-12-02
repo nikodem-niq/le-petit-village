@@ -30,17 +30,28 @@ router.get('/fetch', (req,res,next) => {
     })
 })
 
-router.post('/post', verifyToken, (req,res,next) => {
+router.post('/post', (req,res,next) => {
     pool.connect().then(client => {
         const { bookId, fullName, email, phone, howManyChildren, nameOfChildren } = req.body;
-        let query = `INSERT INTO reservations("bookId", "fullName", email, phone, "howManyChildren", "nameOfChildren") VALUES (${bookId}, '${fullName}', '${email}', '${phone}', ${howManyChildren}, '${nameOfChildren}')`;
-        console.log(query)
-        client.query(query, (err,response) => {
-            client.release();
-            if(err) {
-                console.log(err);
+        client.query(`SELECT * FROM books WHERE "bookId" = ${bookId}`, (err, queriedBook) => {
+            if(queriedBook.rows[0].limit > queriedBook.rows[0].currentlyReservated) {
+                client.query(`UPDATE books SET "currentlyReservated" = "currentlyReservated" + 1 WHERE "bookId" = ${bookId}`)
+                // NEXT
+                let query = `INSERT INTO reservations("bookId", "fullName", email, phone, "howManyChildren", "nameOfChildren") VALUES (${bookId}, '${fullName}', '${email}', '${phone}', ${howManyChildren}, '${nameOfChildren}')`;
+                console.log(query)
+                client.query(query, (err,response) => {
+                    client.release();
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        res.status(200).send(response)
+                    }
+                })
+
+                //
             } else {
-                res.status(200).send(response)
+                client.release();
+                res.status(403).send('Limit exceeded')
             }
         })
     })

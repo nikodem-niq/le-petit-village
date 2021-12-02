@@ -36,7 +36,7 @@ const Login = () => {
     return (
     <OuterWrapper className="loginWrapper">
         <div className="insideLoginWrapper">
-        <h2>Aurora Counselling</h2> <br/>
+        <h2>Le Petit Village</h2> <br/>
         {/* <h2>Log In</h2> <br/> */}
         {loginError ? <ErrorHandler >Invalid Login/Password</ErrorHandler> : ''}
         <label htmlFor="login">Login</label>

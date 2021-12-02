@@ -5,7 +5,7 @@ import './Navbar.css'
 import logo from '../../../img/logo.svg';
 import { useEffect, useState } from 'react';
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [isOpenMenu, openMenu] = useState(false);
     const handleOpenMenu = () => openMenu(!isOpenMenu);
     useEffect(() => {
@@ -14,7 +14,7 @@ const Navbar = () => {
     }, [])
 
     return (
-        <NavWrapper>
+        <NavWrapper className={props.bg ? props.bg : console.log(props)}>
             <MenuIcon id="hamburger" onClick={handleOpenMenu}/>
             {/* <h2 id="headerTitle"><b>Services</b> Counselling</h2> */}
             <div className="logoWrapper">
@@ -78,6 +78,10 @@ const NavWrapper = styled.nav`
     height: 10vh;
     color: white;
     background-color: #E5D6AC;
+
+    .reservationNav {
+        background-color: #F2EFE6 !important;
+    }
     
 `
 
