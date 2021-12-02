@@ -10,7 +10,7 @@ const stripeTestPromise = loadStripe(PUBLIC_KEY)
 const CheckoutLayout = (props) => {
 	return (
 		<Elements stripe={stripeTestPromise}>
-			<CheckoutForm data={props.data} id={props.id}/>
+			<CheckoutForm data={props.data} id={props.id} setFormStep={props.setFormStep}/>
 		</Elements>
 	)
 }

@@ -5,11 +5,13 @@ import './Checkout.css'
 import styled from 'styled-components'
 import { useEffect } from "react"
 import moment from 'moment';
+import { Link } from "react-router-dom"
 
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { modalStyle } from '../../../../utils/config';
+import { BackButton } from "../../../prebuilt--styled/BackButton"
 
 const CARD_OPTIONS = {
 	iconStyle: "solid",
@@ -45,6 +47,7 @@ const CheckoutForm = (props) => {
 
     const stripe = useStripe()
     const elements = useElements()
+
 
     const { fullName,email,phone,howManyChildren,nameOfChildren } = props.data;
     useEffect(() => {
@@ -146,7 +149,7 @@ const CheckoutForm = (props) => {
     }
 }
     return (
-        <>
+        <div className="checkoutWrapper">
         <div>
       <Modal
         open={isModal}
@@ -167,8 +170,10 @@ const CheckoutForm = (props) => {
         <>
         <div style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
         <CheckoutData>
+          <Link to="#" onClick={() => props.setFormStep(1)}><BackButton border="2px solid black">Back</BackButton></Link>
             <div>
                 <h1>Payment details</h1>
+                <hr/>
                 <h2>Price: {programData.cost}£</h2>
                 <h2>Full name: {fullName}</h2>
                 <h2>Email: {email}</h2>
@@ -176,6 +181,7 @@ const CheckoutForm = (props) => {
             </div>
             <div>
                 <h1>Booking details</h1>
+                <hr/>
                 <h2>Date: {bookData.date}</h2>
                 <h2>Time: {bookData.hour}</h2>
                 <h2>How many children: {howManyChildren}</h2>
@@ -195,7 +201,7 @@ const CheckoutForm = (props) => {
         </form>
         </>
             
-        </>
+        </div>
     )
 }
 
@@ -203,8 +209,8 @@ const CheckoutForm = (props) => {
 const CheckoutData = styled.div`
   display: flex;
   /* align-items: center; */
-  justify-content: space-around;
-  font-size: 0.8em;
+  justify-content: space-between;
+  font-size: 0.7rem;
   padding: 5%;
   /* flex-direction: column; */
   width: 50%;
@@ -213,6 +219,18 @@ const CheckoutData = styled.div`
   border-radius: 15px;
   height: auto;
   margin: 5% 0;
+  
+  hr {
+    width: 100%;
+    background-color: black;
+    border: black 1px solid;
+    height: 0.2em;
+    border-radius: 25px;
+  }
+
+  div {
+    margin: 0 5%;
+  }
 `
 
 export default CheckoutForm;

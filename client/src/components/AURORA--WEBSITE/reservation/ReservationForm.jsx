@@ -6,13 +6,15 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import CheckoutLayout from './checkout/CheckoutLayout';
 import { validate } from '../../../middlewares/validate';
+import { BackButton } from '../../prebuilt--styled/BackButton';
+
 
 const ReservationForm = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
 
     // 1st Form
-    const [when, setWhen] = useState('');
+    const [when, setWhen] = useState(0);
 
     // 2nd Form
     const [fullName, setFullName] = useState('');
@@ -91,7 +93,7 @@ const ReservationForm = (props) => {
 
                     </div>
                     <div className="availableReservation">
-                        {data.map((el) => {
+                      {data.length >= 1 ?                         data.map((el) => {
                             return(
                                 <>
                                 {!(el.currentlyReservated >= el.limit) ?
@@ -108,10 +110,11 @@ const ReservationForm = (props) => {
                                 }
                                 </>
                             )
-                        })}
+                        }) : <h1 style={{margin: '10% 0'}}>No schedules planned. Contact us for more information!</h1>}
+
                     </div>
                                     {/* <TextCard> */}
-                                        <NextButton className="nextButton" style={{cursor: 'pointer'}} onClick={() => setFormStep(1)}>Next</NextButton>
+                                        <NextButton className="nextButton" style={when === 0 ? {cursor: 'not-allowed'} : {cursor: 'pointer'}} disabled={when === 0} onClick={() => setFormStep(1)}>Next</NextButton>
                                     {/* </TextCard> */}
                 </div>
                 </>
@@ -139,16 +142,7 @@ const ReservationForm = (props) => {
         case 2:
             return (
                 <div className="reservationWrapper--payment">
-                          <Link to="/booking" onClick={() => setFormStep(1)}><BackButton>Back</BackButton></Link>
-
-                  {/* <div style={{display: 'flex', justifyContent: 'center'}}>
-                    <Link to="/booking" onClick={() => setFormStep(1)}><BackButton>Back</BackButton></Link>
-                    <CheckoutData>
-                      <h1>Payment details</h1>
-                      <h2>Programme: {console.log(props)}</h2>
-                    </CheckoutData>
-                  </div> */}
-                  <CheckoutLayout id={props.id} data={{data, when, fullName, email, phone, howManyChildren, nameOfChildren}}/>
+                  <CheckoutLayout setFormStep={setFormStep} id={props.id} data={{data, when, fullName, email, phone, howManyChildren, nameOfChildren}}/>
                 </div>
             )
       }
@@ -224,24 +218,6 @@ const TextCard = styled.div`
 
 const Header = styled.h1`
     font-size: 2em;
-`
-
-const BackButton = styled.button`
-    position: relative;
-    right: 50%;
-    top: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #E5D6AC;
-    font-size: 1.3em;
-    color: black;
-    height: auto;
-    padding: 1em;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
 `
 
 const NextButton = styled.button`
