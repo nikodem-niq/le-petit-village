@@ -23,7 +23,7 @@ const Navbar = () => {
             <div className="menuWrapper">
                 <ul>
                     <Link to="#">Home</Link>
-                    <Link to="#">Services</Link>
+                    <Link to="/services">Services</Link>
                     <Link to="#">Opening</Link>
                     <Link to="#">Contact</Link>
                 </ul>

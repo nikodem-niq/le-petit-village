@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import FadingBalls from 'react-cssfx-loading/lib/FadingBalls';
-import './HeroSection.css'
-
+import './HeroSection.css';
 import heroGirl from '../../../img/girlHero.svg';
 import heroGirlStroke from '../../../img/girlHeroStroke.svg';
+import DonateButton from '../preBuild/donateButton';
+import Arrow from '../../../img/vectors/Arrow.svg';
 
 
 const HeroSection = () => {
@@ -20,17 +22,22 @@ const HeroSection = () => {
             <div className="imgOpacity"></div>
             <HeroWrapper id="heroWrapperComponent">
                 <div id="heroWrapper">
-                    <h1>header</h1>
-                    <h2>sub header</h2>
-                    <button className="readMoreBtn">Read more..</button>
+                    <h1 id='heroHeader'>Welcome To The <span id='text-underline'>Village</span></h1>
+                    <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Fusce porta, turpis vel feugiat laoreet, nisi justo finibus lectus, 
+                        a bibendum arcu nulla pellentesque </h2>
+                        <Link to="/booking" id="donateLink"><DonateButton id="readMoreBtn">Read more
+                        <img className='button-arrow' src={Arrow}/></DonateButton></Link>
                 </div>
+                    <div className="heroGirl">
+                        <img src={heroGirl}/>
+                    </div>
+                    <div className="heroGirlStroke">
+                        <img className="heroGirlStroke" src={heroGirlStroke}/>
+                    </div>
+                
 
-                <div className="heroGirl">
-                    <img src={heroGirl}/>
-                </div>
-                <div className="heroGirlStroke">
-                    <img className="heroGirlStroke" src={heroGirlStroke}/>
-                </div>
+
             </HeroWrapper>
 
             <HeroWrapperMobile id="heroWrapperMobile">
@@ -46,7 +53,7 @@ const HeroSection = () => {
 
 const Wrapper = styled.div`
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background: #E5D6AC;
 `
 
@@ -61,18 +68,20 @@ const HeroWrapperMobile = styled.div`
     align-items: center;
     width: 90%;
     height: 65vh;
+    color: #171511;
     /* background-color: red; */
-    font-size: 0.8em;
+    
 
     #heroWrapper {
-        width: 80%;
-        color: white;
+        width: 773px;
         height: auto;
         background-color: #5555557b;
         padding: 4%;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
     }
+
+    
 
     #heroWrapper > h1, #heroWrapper > h2 {
         transition: all 2s linear;
@@ -115,7 +124,9 @@ const HeroWrapper = styled.div`
     width: 90%;
     height: 100vh;
     /* background-color: red; */
-    font-size: 0.8em;
+
+    
+    
 
     #heroWrapper {
         width: 70%;

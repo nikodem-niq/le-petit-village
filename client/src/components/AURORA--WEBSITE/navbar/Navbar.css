@@ -18,7 +18,8 @@
 }
 
 .logoWrapper {
-    width: 15vw;
+    width: 20vw;
+    padding: 5px 0 0 15px;
 }   
 
 .logoWrapper img {
@@ -46,29 +47,27 @@
 
     .menuWrapper > ul {
         position: relative;
-        right: 20%;
+        right: 10%;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        font-weight: bold;
     }
 
     .menuWrapper > ul > a {
         text-decoration: none;
-        margin: 0 2vw;
+        margin: 0 1vw;
         color: black;
-        font-size: 1.45em;
+        font-size: 1.1em;
     }
 
     #donateBtn {
+        top: 0.3em;
         position: relative;
         right: 10%;
         width: 10vw;
-        font-size: 1vw;
-    }
-
-    #donateBtn:hover::after {
-        transform: translate(5%,9%);
-        width: 98%;
+        padding: 5px 15px 15px 5px;
+        font-size: 0.8em;
     }
 
     #donateBtn::after {
@@ -80,7 +79,5 @@
         height: 90%;
         border: 2px solid black;
         border-radius: 20px;
-
-        transition: all 0.2s ease-in-out;
     }
 }
