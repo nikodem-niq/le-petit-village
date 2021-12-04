@@ -21,6 +21,8 @@ import Reservations from "./pages/reservations/Reservations";
 
 import ReservationPage from "./pages/AURORA--WEBSITE/home/ReservationPage";
 
+// import Services from './pages/AURORA--WEBSITE/home/ServicesPage';
+import ServicesPage from "./pages/AURORA--WEBSITE/home/ServicesPage";
 
 
 const App = () => {
@@ -49,6 +51,7 @@ const App = () => {
 
           <Route path="/booking/:id" component={ReservationPage}/>
           <Route path="/booking" component={ReservationPage}/>
+          <Route path='/services' component={ServicesPage}/>
           <Route path="/" component={AuroraHome}/>
         </Switch>
     </Router>

@@ -6,7 +6,7 @@ import Hero from '../../../components/AURORA--WEBSITE/servicesHero/Hero';
 
 
 
-const AuroraServices = () => {
+const ServicesPage = () => {
     return (
     <div>
         <Navbar />
@@ -16,4 +16,4 @@ const AuroraServices = () => {
 )}
 
 
-export default AuroraServices;
+export default ServicesPage;

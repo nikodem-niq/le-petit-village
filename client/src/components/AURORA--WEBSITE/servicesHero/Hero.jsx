@@ -32,4 +32,3 @@ const HeroWrapper = styled.div`
 `
 
 export default Hero;
-export default HeroWrapper;
