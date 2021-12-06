@@ -145,7 +145,7 @@ const OfferWrapper = styled.div`
     min-height: 100vh;
     height: auto;
 
-    margin-top: 5%;
+    /* margin-top: 5%; */
 
     #offerCardWrapper {
         display: flex;
