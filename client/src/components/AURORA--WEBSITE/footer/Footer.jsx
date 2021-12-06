@@ -48,7 +48,6 @@ const FooterWrapper = styled.footer`
     width: 100%;
     background-color: #242424;
     color: white;
-
     display: flex;
     flex-direction: column;
 `

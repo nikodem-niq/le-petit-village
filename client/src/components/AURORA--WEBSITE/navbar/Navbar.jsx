@@ -18,11 +18,11 @@ const Navbar = (props) => {
             <MenuIcon id="hamburger" onClick={handleOpenMenu}/>
             {/* <h2 id="headerTitle"><b>Services</b> Counselling</h2> */}
             <div className="logoWrapper">
-                <img src={logo}/>
+                <Link to="/"><img src={logo}/></Link>
             </div>
             <div className="menuWrapper">
                 <ul>
-                    <Link to="#">Home</Link>
+                    <Link to="/">Home</Link>
                     <Link to="/services">Services</Link>
                     <Link to="#">Opening</Link>
                     <Link to="#">Contact</Link>
@@ -31,8 +31,8 @@ const Navbar = (props) => {
             </div>
                     {isOpenMenu ? <NavMobile>
                     <ul className="navMobileList">
-                    <Link to="#">Home</Link>
-                    <Link to="#">Services</Link>
+                    <Link to="/">Home</Link>
+                    <Link to="/services">Services</Link>
                     <Link to="#">Opening</Link>
                     <Link to="#">Contact</Link>
                     </ul>

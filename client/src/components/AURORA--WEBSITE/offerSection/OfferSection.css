@@ -1,3 +1,9 @@
 #offerWrapper {
-    background-color: #F2EFE6;
+    background-color: #E5D6AC;
 }
+
+/* @media screen and (max-width: 768px) {
+    .offerCards {
+        flex: 1 0 100%;
+    }
+} */
