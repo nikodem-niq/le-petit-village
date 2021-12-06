@@ -12,7 +12,7 @@ const AuroraHome = () => {
         <div>
             <Navbar/>
             <HeroSection/>
-            {/* <OfferSection/> */}
+            {/* <OfferSection/> */} 
             <About />
             <Footer />
         </div>

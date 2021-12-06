@@ -3,13 +3,3 @@
     --brown-bg: #E5D6AC;
 }
 
-
-body {
-    background-color: var(--brown-bg);
-}
-
-
-h1 {
-    color: var(--header-color);
-    font-size: 10em;
-}

@@ -22,7 +22,7 @@ const Navbar = (props) => {
             </div>
             <div className="menuWrapper">
                 <ul>
-                    <Link to="#">Home</Link>
+                    <Link to="/">Home</Link>
                     <Link to="/services">Services</Link>
                     <Link to="#">Opening</Link>
                     <Link to="#">Contact</Link>
@@ -31,7 +31,7 @@ const Navbar = (props) => {
             </div>
                     {isOpenMenu ? <NavMobile>
                     <ul className="navMobileList">
-                    <Link to="#">Home</Link>
+                    <Link to="/">Home</Link>
                     <Link to="#">Services</Link>
                     <Link to="#">Opening</Link>
                     <Link to="#">Contact</Link>
